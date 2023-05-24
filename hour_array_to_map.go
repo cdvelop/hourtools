@@ -1,4 +1,4 @@
-package hour
+package timetools
 
 // ej: "08:00" -> "08:00": "8:00"
 func HourArrayToMap(hour_in []string) (out map[string]string) {
