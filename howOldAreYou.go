@@ -7,7 +7,7 @@ import (
 // obtener edad en formato numero ej: (birthday) "2006-01-02"
 func HowOldAreYou(birthday string, time model.TimeNow) (int, error) {
 
-	err := CorrectDate(birthday)
+	err := CorrectFormatDate(birthday)
 	if err != nil {
 		return 0, err
 	}
@@ -17,18 +17,12 @@ func HowOldAreYou(birthday string, time model.TimeNow) (int, error) {
 	}
 
 	// Divide la fecha de nacimiento y la fecha actual en año, mes y día usando la función strconv.Atoi
-	yearBirth, monthBirth, dayBirth, err := StringToDateSeparate(birthday)
-	if err != nil {
-		return 0, err
-	}
+	yearBirth, monthBirth, dayBirth := stringToDateSeparate(birthday)
 
 	// Obtén la fecha actual en el mismo formato que la fecha de nacimiento
 	today := time.ToDay("2006-01-02")
 
-	yearNow, monthNow, dayNow, err := StringToDateSeparate(today)
-	if err != nil {
-		return 0, err
-	}
+	yearNow, monthNow, dayNow := stringToDateSeparate(today)
 
 	// Calcula la diferencia en años
 	age := yearNow - yearBirth

@@ -6,10 +6,11 @@ import (
 	"github.com/cdvelop/model"
 )
 
-// formato fecha "2006-01-02"
-func StringToDateSeparate(date string) (year, month, day int, err error) {
+// formato fecha "2006-01-02" retorna: 2006,1,2. NOTA: NO VERIFICA EL FORMATO INGRESADO
+func stringToDateSeparate(date string) (year, month, day int) {
+
 	//YEAR
-	year, err = strconv.Atoi(date[:4])
+	year, err := strconv.Atoi(date[:4])
 	if err != nil {
 		return
 	}
@@ -22,7 +23,7 @@ func StringToDateSeparate(date string) (year, month, day int, err error) {
 	} else if monthText >= "10" && monthText <= "12" {
 		month, err = strconv.Atoi(monthText)
 	} else {
-		err = model.Error("error", monthText, "es un formato de mes incorrecto ej: 01 o 1")
+		err = model.Error("error", monthText, "es un formato de mes incorrecto ej: 01 a 12")
 	}
 	if err != nil {
 		return
@@ -35,8 +36,6 @@ func StringToDateSeparate(date string) (year, month, day int, err error) {
 		day, err = strconv.Atoi(string(dayTxt[1]))
 	} else if dayTxt >= "10" && dayTxt <= "31" {
 		day, err = strconv.Atoi(dayTxt)
-	} else {
-		err = model.Error("error", dayTxt, "es un formato dia incorrecto")
 	}
 
 	return
