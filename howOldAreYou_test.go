@@ -47,8 +47,8 @@ func Test_HowOldAreYou(t *testing.T) {
 
 			ageResp := strconv.Itoa(resp)
 
-			if err != nil {
-				ageResp = err.Error()
+			if err != "" {
+				ageResp = err
 			}
 
 			// and error handler

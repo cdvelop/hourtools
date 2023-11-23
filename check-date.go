@@ -2,15 +2,13 @@ package timetools
 
 import (
 	"strconv"
-
-	"github.com/cdvelop/model"
 )
 
 // verifica formato y valores numéricos en sus posiciones ej: "2006-01-02"
-func CorrectFormatDate(date string) error {
+func CorrectFormatDate(date string) (err string) {
 
 	if len(date) != 10 {
-		return model.Error("formato de fecha ingresado incorrecto ej: 2006-01-02")
+		return "formato de fecha ingresado incorrecto ej: 2006-01-02"
 	}
 
 	numMap := map[byte]bool{
@@ -22,54 +20,58 @@ func CorrectFormatDate(date string) error {
 	for i, char := range date {
 		if i == 4 || i == 7 {
 			if char != '-' {
-				return model.Error("formato de fecha ingresado incorrecto ej: 2006-01-02")
+				return "formato de fecha ingresado incorrecto ej: 2006-01-02"
 			}
 		} else {
 			if !numMap[byte(char)] {
-				return model.Error("formato de fecha ingresado incorrecto ej: 2006-01-02")
+				return "formato de fecha ingresado incorrecto ej: 2006-01-02"
 			}
 		}
 	}
 
-	return nil
+	return ""
 }
 
 // verifica formato 2006-01-02 y si los rangos de el año, mes y dia son validos
 // y si los Dias existen según año y mes bisiesto
-func CheckDateExists(date string) error {
-
-	err := CorrectFormatDate(date)
-	if err != nil {
-		return err
+func CheckDateExists(date string) (err string) {
+	const this = "CheckDateExists "
+	err = CorrectFormatDate(date)
+	if err != "" {
+		return this + err
 	}
 
-	year, month, day := stringToDateSeparate(date)
+	year, month, day, er := stringToDateSeparate(date)
+	if er != "" {
+		err = this + er
+		return
+	}
 
 	// Verificar los rangos para año, mes y día
 
 	if year < 1000 || year > 9999 {
-		return model.Error("año fuera de rango")
+		return "año fuera de rango"
 	}
 
 	if month < 1 || month > 12 {
-		return model.Error("mes fuera de rango")
+		return "mes fuera de rango"
 	}
 
 	month_days := MonthDays(year)[month]
 	if day < 1 {
-		return model.Error("día no puede ser cero")
+		return "día no puede ser cero"
 	}
 
 	if day > month_days {
 
-		msg := SpanishMonth()[month] + " no contiene " + strconv.Itoa(day) + " días."
+		err = SpanishMonth()[month] + " no contiene " + strconv.Itoa(day) + " días."
 
 		if !IsLeap(year) && month == 2 {
-			msg += " año " + date[:4] + " no es bisiesto."
+			err += " año " + date[:4] + " no es bisiesto."
 		}
 
-		return model.Error(msg)
+		return err
 	}
 
-	return nil
+	return ""
 }

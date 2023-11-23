@@ -7,18 +7,23 @@ import (
 )
 
 // formato fecha "2006-01-02" out; Vie,25,Dic,2011
-func StringDateToShort(date_in string, week model.TimeWeek) (textDay, day, textMonth, year string, err error) {
-
+func StringDateToShort(date_in string, week model.TimeWeek) (textDay, day, textMonth, year, err string) {
+	const this = "StringDateToShort "
 	err = CorrectFormatDate(date_in)
-	if err != nil {
+	if err != "" {
+		err = this + err
 		return
 	}
 
-	y, m, d := stringToDateSeparate(date_in)
+	y, m, d, err := stringToDateSeparate(date_in)
+	if err != "" {
+		err = this + err
+		return
+	}
 
-	w, err2 := week.WeekDayNumber(date_in)
-	if err2 != nil {
-		err = err2
+	w, err := week.WeekDayNumber(date_in)
+	if err != "" {
+		err = this + err
 		return
 	}
 
