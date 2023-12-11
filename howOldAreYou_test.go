@@ -8,22 +8,34 @@ import (
 	"github.com/cdvelop/timetools"
 )
 
-type today struct{}
+type today struct {
+	hour
+}
 
-func (today) ToDay(layout string) string {
+func (today) DateToDay() string {
 	return "2023-06-21"
 }
 
-type yesterday struct{}
+type yesterday struct {
+	hour
+}
 
-func (yesterday) ToDay(layout string) string {
+func (yesterday) DateToDay() string {
 	return "2023-02-20"
 }
 
-type tomorrowIsLeap struct{}
+type tomorrowIsLeap struct {
+	hour
+}
 
-func (tomorrowIsLeap) ToDay(layout string) string {
+func (tomorrowIsLeap) DateToDay() string {
 	return "2024-02-29"
+}
+
+type hour struct{}
+
+func (hour) DateToDayHour() string {
+	return "2006-01-02 15:04:05"
 }
 
 func Test_HowOldAreYou(t *testing.T) {
