@@ -4,7 +4,6 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/cdvelop/model"
 	"github.com/cdvelop/timetools"
 )
 
@@ -43,7 +42,7 @@ func Test_HowOldAreYou(t *testing.T) {
 	var (
 		dataDateShort = map[string]struct {
 			birthDay    string
-			timeHandler model.TimeNow
+			timeHandler timetools.TimeNow
 			ageExpected string //31
 		}{
 			"fecha actual 2023-06-21":              {"1981-06-21", today{}, "42"},
