@@ -4,6 +4,25 @@ import (
 	"strconv"
 )
 
+// date_in: "2006-01-02 15:04:05" or "2006-01-02"
+// out: date:"2006-01-02" hour:"15:04" seconds:"05"
+func SeparateDateHourAndSeconds(date_in string) (date, hour, seconds string) {
+
+	if len(date_in) == 19 {
+		// Formato "2006-01-02 15:04:05"
+		date = date_in[:10]
+		hour = date_in[11:16]
+		seconds = date_in[17:]
+	} else if len(date_in) == 10 {
+		// Formato "2006-01-02"
+		date = date_in
+		hour = "00:00"
+		seconds = "00"
+	}
+
+	return
+}
+
 // formato fecha "2006-01-02" retorna: 2006,1,2. NOTA: NO VERIFICA EL FORMATO INGRESADO
 func stringToDateSeparate(date string) (year, month, day int, err string) {
 
