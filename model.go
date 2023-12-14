@@ -4,7 +4,7 @@ type TimeNow interface {
 	//ej: 2006-01-02
 	DateToDay() string
 	//ej: 2006-01-02 15:04:05
-	DateToDayHour() string
+	DateToDayHour(with_seconds ...bool) (date, hour string)
 }
 
 type TimeWeek interface {

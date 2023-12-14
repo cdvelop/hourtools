@@ -33,8 +33,8 @@ func (tomorrowIsLeap) DateToDay() string {
 
 type hour struct{}
 
-func (hour) DateToDayHour() string {
-	return "2006-01-02 15:04:05"
+func (hour) DateToDayHour(with_seconds ...bool) (date, hour string) {
+	return "2006-01-02", "15:04:05"
 }
 
 func Test_HowOldAreYou(t *testing.T) {
