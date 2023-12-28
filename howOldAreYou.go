@@ -1,7 +1,9 @@
 package timetools
 
+import "github.com/cdvelop/model"
+
 // obtener edad en formato numero ej: (birthday) "2006-01-02"
-func HowOldAreYou(birthday string, time TimeNow) (age int, err string) {
+func HowOldAreYou(birthday string, time model.TimeNow) (age int, err string) {
 	const this = "HowOldAreYou "
 	err = CorrectFormatDate(birthday)
 	if err != "" {
@@ -20,7 +22,7 @@ func HowOldAreYou(birthday string, time TimeNow) (age int, err string) {
 	}
 
 	// Obtén la fecha actual en el mismo formato que la fecha de nacimiento
-	today := time.DateToDay()
+	today := time.DateToDay(nil)
 
 	yearNow, monthNow, dayNow, er := stringToDateSeparate(today)
 	if er != "" {

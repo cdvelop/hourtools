@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/cdvelop/model"
 	"github.com/cdvelop/timetools"
 )
 
@@ -11,7 +12,7 @@ type today struct {
 	hour
 }
 
-func (today) DateToDay(left_day_format ...bool) string {
+func (today) DateToDay(df *model.DateFormat) string {
 	return "2023-06-21"
 }
 
@@ -19,7 +20,7 @@ type yesterday struct {
 	hour
 }
 
-func (yesterday) DateToDay(left_day_format ...bool) string {
+func (yesterday) DateToDay(df *model.DateFormat) string {
 	return "2023-02-20"
 }
 
@@ -27,13 +28,13 @@ type tomorrowIsLeap struct {
 	hour
 }
 
-func (tomorrowIsLeap) DateToDay(left_day_format ...bool) string {
+func (tomorrowIsLeap) DateToDay(df *model.DateFormat) string {
 	return "2024-02-29"
 }
 
 type hour struct{}
 
-func (hour) DateToDayHour(with_seconds ...bool) (date, hour string) {
+func (hour) DateToDayHour(df *model.DateFormat) (date, hour string) {
 	return "2006-01-02", "15:04:05"
 }
 
@@ -42,7 +43,7 @@ func Test_HowOldAreYou(t *testing.T) {
 	var (
 		dataDateShort = map[string]struct {
 			birthDay    string
-			timeHandler timetools.TimeNow
+			timeHandler model.TimeNow
 			ageExpected string //31
 		}{
 			"fecha actual 2023-06-21":              {"1981-06-21", today{}, "42"},
