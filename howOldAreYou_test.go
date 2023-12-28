@@ -11,7 +11,7 @@ type today struct {
 	hour
 }
 
-func (today) DateToDay() string {
+func (today) DateToDay(left_day_format ...bool) string {
 	return "2023-06-21"
 }
 
@@ -19,7 +19,7 @@ type yesterday struct {
 	hour
 }
 
-func (yesterday) DateToDay() string {
+func (yesterday) DateToDay(left_day_format ...bool) string {
 	return "2023-02-20"
 }
 
@@ -27,7 +27,7 @@ type tomorrowIsLeap struct {
 	hour
 }
 
-func (tomorrowIsLeap) DateToDay() string {
+func (tomorrowIsLeap) DateToDay(left_day_format ...bool) string {
 	return "2024-02-29"
 }
 

@@ -2,7 +2,7 @@ package timetools
 
 type TimeNow interface {
 	//ej: 2006-01-02
-	DateToDay() string
+	DateToDay(left_day_format ...bool) string
 	//ej: 2006-01-02 15:04:05
 	DateToDayHour(with_seconds ...bool) (date, hour string)
 }
