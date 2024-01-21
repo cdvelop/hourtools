@@ -3,7 +3,6 @@ package timetools
 // real_date:2006-01-02 15:04:05 fake_date 2006-01-02 or same real date
 // return: date:"2006-01-02" hour:"15:04" optional seconds:"15:04:05"
 // left
-var date_format_in *DateFormat
 
 func DateToDayHour(real_date, fake_date string, dateFormat any) (date, hour string) {
 
@@ -23,10 +22,9 @@ func DateToDayHour(real_date, fake_date string, dateFormat any) (date, hour stri
 
 	}
 
-	date_format_in = dateFormat.(*DateFormat)
-
 	var with_sec string
-	if date_format_in != nil {
+
+	if date_format_in, ok := dateFormat.(*DateFormat); ok {
 
 		if date_format_in.LeftDay {
 			changeLeftDayFormat(&date)
@@ -35,6 +33,7 @@ func DateToDayHour(real_date, fake_date string, dateFormat any) (date, hour stri
 		if date_format_in.WithSeconds {
 			with_sec = ":" + sec
 		}
+
 	}
 
 	hour += with_sec
