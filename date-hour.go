@@ -1,14 +1,9 @@
 package timetools
 
-import (
-	"github.com/cdvelop/model"
-	"github.com/cdvelop/strings"
-)
-
 // real_date:2006-01-02 15:04:05 fake_date 2006-01-02 or same real date
 // return: date:"2006-01-02" hour:"15:04" optional seconds:"15:04:05"
 // left
-func DateToDayHour(real_date, fake_date string, df *model.DateFormat) (date, hour string) {
+func DateToDayHour(real_date, fake_date string, df *DateFormat) (date, hour string) {
 
 	var sec string
 
@@ -16,7 +11,7 @@ func DateToDayHour(real_date, fake_date string, df *model.DateFormat) (date, hou
 		date, hour, sec = SeparateDateHourAndSeconds(fake_date)
 
 		// si fake_date no contiene la hora se la agregamos de la original
-		if strings.Contains(fake_date, ":") == 0 {
+		if Contains(fake_date, ":") == 0 {
 			_, hour, sec = SeparateDateHourAndSeconds(real_date)
 		}
 
@@ -29,11 +24,11 @@ func DateToDayHour(real_date, fake_date string, df *model.DateFormat) (date, hou
 	var with_sec string
 	if df != nil {
 
-		if df.LeftDay {
+		if df.Left_Day {
 			changeLeftDayFormat(&date)
 		}
 
-		if df.WithSeconds {
+		if df.With_Seconds {
 			with_sec = ":" + sec
 		}
 	}

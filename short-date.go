@@ -2,12 +2,15 @@ package timetools
 
 import (
 	"strconv"
-
-	"github.com/cdvelop/model"
 )
 
+type TimeWeek interface {
+	//date ej: 2006-01-02,  0 para Domingo, 1 para Lunes, etc.
+	WeekDayNumber(date_in string) (n int, err string)
+}
+
 // formato fecha "2006-01-02" out; Vie,25,Dic,2011
-func StringDateToShort(date_in string, week model.TimeWeek) (textDay, day, textMonth, year, err string) {
+func StringDateToShort(date_in string, week TimeWeek) (textDay, day, textMonth, year, err string) {
 	const this = "StringDateToShort "
 	err = CorrectFormatDate(date_in)
 	if err != "" {
