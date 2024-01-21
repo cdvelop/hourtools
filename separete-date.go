@@ -23,8 +23,22 @@ func SeparateDateHourAndSeconds(date_in string) (date, hour, seconds string) {
 	return
 }
 
+func SeparateDate(date string) (year, month, day, err string) {
+	const e = "SeparateDate "
+	if err = CorrectFormatDate(date); err != "" {
+		err = e + err
+		return
+	}
+
+	year = date[:4]
+	month = date[5:7]
+	day = date[8:10]
+
+	return
+}
+
 // formato fecha "2006-01-02" retorna: 2006,1,2. NOTA: NO VERIFICA EL FORMATO INGRESADO
-func stringToDateSeparate(date string) (year, month, day int, err string) {
+func stringToDateNumberSeparate(date string) (year, month, day int, err string) {
 
 	//YEAR
 	year, e := strconv.Atoi(date[:4])

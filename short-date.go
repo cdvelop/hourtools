@@ -15,7 +15,7 @@ func StringDateToShort(date_in string, week model.TimeWeek) (textDay, day, textM
 		return
 	}
 
-	y, m, d, err := stringToDateSeparate(date_in)
+	y, m, d, err := stringToDateNumberSeparate(date_in)
 	if err != "" {
 		err = this + err
 		return

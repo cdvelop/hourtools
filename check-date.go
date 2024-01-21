@@ -41,7 +41,7 @@ func CheckDateExists(date string) (err string) {
 		return this + err
 	}
 
-	year, month, day, er := stringToDateSeparate(date)
+	year, month, day, er := stringToDateNumberSeparate(date)
 	if er != "" {
 		err = this + er
 		return

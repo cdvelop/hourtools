@@ -15,7 +15,7 @@ func HowOldAreYou(birthday string, time model.TimeNow) (age int, err string) {
 	}
 
 	// Divide la fecha de nacimiento y la fecha actual en año, mes y día usando la función strconv.Atoi
-	yearBirth, monthBirth, dayBirth, er := stringToDateSeparate(birthday)
+	yearBirth, monthBirth, dayBirth, er := stringToDateNumberSeparate(birthday)
 	if er != "" {
 		err = this + er
 		return
@@ -24,7 +24,7 @@ func HowOldAreYou(birthday string, time model.TimeNow) (age int, err string) {
 	// Obtén la fecha actual en el mismo formato que la fecha de nacimiento
 	today := time.DateToDay(nil)
 
-	yearNow, monthNow, dayNow, er := stringToDateSeparate(today)
+	yearNow, monthNow, dayNow, er := stringToDateNumberSeparate(today)
 	if er != "" {
 		err = this + er
 		return
