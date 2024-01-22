@@ -31,6 +31,7 @@ func SeparateDate(date string) (year, month, day, err string) {
 	}
 
 	year = date[:4]
+
 	month = date[5:7]
 	day = date[8:10]
 
