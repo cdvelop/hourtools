@@ -11,6 +11,7 @@ type TimeWeek interface {
 
 // formato fecha "2006-01-02" out; Vie,25,Dic,2011
 func StringDateToShort(date_in string, week TimeWeek) (textDay, day, textMonth, year, err string) {
+
 	const this = "StringDateToShort "
 	err = CorrectFormatDate(date_in)
 	if err != "" {
